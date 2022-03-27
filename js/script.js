@@ -1,6 +1,6 @@
 "use strict";
 
-
+// какой то скрипт
 
 
 let incr = 10,
