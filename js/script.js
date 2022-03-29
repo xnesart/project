@@ -51,22 +51,55 @@
 //         break;
 // }
 
-
-
 // while (num <= 55) {
 //   console.log(num);
 //   num++;
 // }
-do {
-  console.log(num);
-  num++;
-} 
-while (num < 55);
-let num = 50;
+// do {
+//   console.log(num);
+//   num++;
+// }
+// while (num < 55);
+// let num = 50;
 
-for (let i = 1; i < 10; i++) {
-    if (i === 6){
-        continue;    
-    }
-    console.log(i);
+// for (let i = 1; i < 10; i++) {
+//     if (i === 6){
+//         continue;
+//     }
+//     console.log(i);
+// }
+
+let numberOfFilms = prompt("Сколько фильмов вы посмотрели?", "");
+let lookedFilm;
+let filmRate;
+
+const personalMovieDB = {
+  count: numberOfFilms,
+  movies: {},
+  actors: {},
+  genres: [],
+  privat: false,
+};
+
+for (let i = 1; i <= 2; i++) {
+  lookedFilm = prompt("Один из последних просмотренных фильмов?", "");
+  if (lookedFilm === 0 || lookedFilm > 50) {
+    console.log("неподходящая длина ответа");
+    break;
+  } else if (lookedFilm === null) {
+    console.log("отмена");
+    break;
+  }
+  filmRate = prompt("На сколько оцените фильм?", "");
+  personalMovieDB.movies[lookedFilm] = filmRate;
+  if (personalMovieDB.count < 10) {
+    console.log("Просмотрено немного фильмов");
+  } else if (personalMovieDB.count > 10 < 30) {
+    console.log("Вы классический зритель");
+  } else {
+    console.log("вы заядлый киноман мазафака");
+  }
 }
+// personalMovieDB.movies[lookedFilm] = filmRate;
+
+console.log(personalMovieDB);
