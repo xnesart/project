@@ -1,25 +1,59 @@
 "use strict";
 
-function first() {
-  // Do something
-  setTimeout(function () {
-    console.log(1);
-  }, 500);
-}
+const obj = new Object();
 
-function second() {
-  console.log(2);
-}
-first();
-second();
+const options = {
+  name: "test",
+  width: 1024,
+  height: 1024,
+  colors: {
+    border: "black",
+    bg: "red",
+  },
+  makeTest: function () {
+    console.log("test");
+  },
+};
+options.makeTest();
+console.log(Object.keys(options));
+const {border, bg} = options.colors;
+console.log(border)
+// console.log(options.name);
 
-function learnJS(lang, callback) {
-  console.log(`Я учу: ${lang}`);
-  callback();
-}
+// delete options.name;
 
-function done() {
-  console.log("Я прошел этот урок");
-}
+console.log(options);
 
-learnJS("JavaScript", done);
+let counter = 0;
+for (let key in options) {
+  if (typeof options[key] === "object") {
+    for (let i in options[key]) {
+      console.log(`Свойство ${key} имеет значение ${options[key][i]}`);
+      counter++;
+    }
+  } else {
+    console.log(`Свойство ${key} имеет значение ${options[key]}`);
+    counter++;
+  }
+}
+console.log(counter);
+
+// let counter = 0;
+// for (let key in options){
+//   counter++;
+// }
+// console.log(counter);
+
+const someObject = {
+  name: "Riddick",
+  game: "Chronicles of Riddick",
+  like: true,
+  score: 70,
+  time: "10 hours",
+  lovelyWeapon: {
+    first: "shotgun",
+    second: "pistol",
+    third: "rifle",
+  },
+};
+console.log(Object.keys(someObject));
