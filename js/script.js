@@ -1,69 +1,28 @@
 "use strict";
 
-// 1) Это старый вариант превращения в строку. С помощью String
-console.log(typeof(String(null))); // превращаем null в строку
-// 2) Это более новый вариант
-console.log(typeof (null + "")); //При сложении чего либо со строкой получается строка
+// Получение элемента по id
+const box = document.getElementById('box');
+console.log(box);
+// Получение элемента по названию тегов
+const btns = document.getElementsByTagName('button'); // Тут мы получили не один элемент, а псевдомассив
+console.log(btns);
+// Получаем конкретную кнопку
+const btns = document.getElementsByTagName('button')[1];
+console.log(btns);
+// Меняем стиль конкретной кнопки
+console.log(btns[0]);//Обратились к конкретной кнопке
 
-const num = 5;
+const circles = document.getElementsByClassName('circle');
+console.log(circles);
 
-console.log("https://vk.com/catalog/" + num); // Пример использования - чтобы динамически подключить страницу
+// Современные методы
+// В скобки помещаем css селектор
+const hearts = document.querySelectorAll('.heart'); // Он поддерживает все методы, которые были выше. У него есть метод forEach, хотя он является псевдомассивом
+console.log(hearts);
+hearts.forEach(item => {
+  console.log(item);
+});
 
-// To number
-
-// 1) Старое превращение в число
-console.log(typeof(Number('4')));
-// 2) Превращение в число с помощью унарного плюса
-console.log(typeof(+'5'));
-// 3) Превращение в число, 15пикселей в 10чной системе.
-console.log(typeof(parseInt("15px", 10)));
-
-let answ = +prompt("Hello", "");
-
-// Всё что получаем от пользователя - всегда будет строкой, часто его надо преобразовать в другой тип
-
-// To boolean
-// 1)
-// False
-0, '', null, undefined, NaN;
-// True всё остальное
-
-let switcher = null;
-if (switcher) {
-  console.log('Working...');
-};
-
-switcher = 1;
-if (switcher) {
-  console.log('Working...');
-};
-
-// 2)
-console.log(typeof(Boolean('4')));
-
-// 3) два знака !! это превращение в boolean
-console.log(typeof(!!"4444"));
-
-console.log(1 && 2);
-// И запинается на лжи
-// Или запинается на правде
-                3
-alert(null || 2 && 3 || 4);
-// Сначала выполняется 2 и 3, будет 3, тк последнее значение берётся. Далее сравнивается null или 3,  или запинается на правде, будет 3. Потом сравнивается 3 или 4, тоже будет 3, тк запинается на правде
-
-// Сравнение двух массивов
-const a = [1, 2, 3];
-const b = [1, 2, 3];
-// Равны ли эти массивы? - нет, не равны. Просто сейчас в них одинаковые данные.
-
-// Что выведет этот код?
-alert(+'infinity');
-// Будет infinity числовое.
-
-// Что выведет этот код?
-console.log("Ёжик" > "яблоко");
-// Строки можно сравнивать, идёт посимвольное сравнение. "Ё" большое идёт раньше в таблице unicode чем "я" маленькое. Будет false
-
-// Чему равно
-console.log(0 || "" || 2 || undefined || true || false);
-// Или запинается на правде, будет 2
+// Получаем первый попавшийся элемент
+const oneHeart = document.querySelector('.heart');
+console.log(oneHeart);
