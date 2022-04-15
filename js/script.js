@@ -1,67 +1,48 @@
+/* Задания на урок:
+
+1) Удалить все рекламные блоки со страницы (правая часть сайта)
+
+2) Изменить жанр фильма, поменять "комедия" на "драма"
+
+3) Изменить задний фон постера с фильмом на изображение "bg.jpg". Оно лежит в папке img.
+Реализовать только при помощи JS
+
+4) Список фильмов на странице сформировать на основании данных из этого JS файла.
+Отсортировать их по алфавиту 
+
+5) Добавить нумерацию выведенных фильмов */
+
 "use strict";
 
-const box = document.getElementById("box"),
-  btns = document.getElementsByTagName("button"),
-  circles = document.getElementsByClassName("circle"),
-  hearts = document.querySelectorAll(".heart"),
-  oneHeart = document.querySelector(".heart");
+const movieDB = {
+  movies: ["Логан", "Лига справедливости", "Ла-ла лэнд", "Одержимость", "Скотт Пилигрим против..."],
+};
 
-console.dir(box);
-box.style.backgroundColor = "blue";
-box.style.width = "500px";
-btns[1].style.borderRadius = "100%";
-circles[0].style.backgroundColor = "red";
+let ads = document.querySelector(".promo__adv");
+let ads2 = document.querySelectorAll(".promo__adv img");
+let promoGenre = document.querySelector(".promo__genre");
+let promoBg = document.querySelector(".promo__bg");
+// let interactiveItems = document.querySelectorAll(".promo__interactive-item");
+let moveList = document.querySelector(".promo__interactive-list");
 
-// Назначение нескольких inline стилей
-box.style.cssText = "background-color: aqua; width: 500px";
-
-// Над несколькими элементами
-// 1
-for (let i = 0; i < hearts.length; i++) {
-  hearts[i].style.backgroundColor = "blue";
-}
-// 2
-hearts.forEach((item) => {
-  item.style.backgroundColor = "blue";
+moveList.innerHTML = "";
+movieDB.movies.sort();
+movieDB.movies.forEach((film, i) =>{
+  moveList.innerHTML = moveList.innerHTML + `
+  <li class="promo__interactive-item">${i + 1} ${film}
+    <div class="delete"></div>
+  </li>
+  `;
 });
-// Создаем элемент, он существует только внутри js, он не появится на странице
-const div = document.createElement("div");
-//Используется редко
-const text = document.createTextNode("Тут был я");
+// interactiveItems[0].replaceWith(movieDB.movies[0]);
+// ads.remove();
 
-//Создаем элемент и добавляем класс
-div.classList.add("black");
-//Добавляем наш div в конец body. Тупо выбираем родителя и ему добавляем элемент
-document.body.append(div);
-// 2
-document.querySelector(".wrapper").append(div);
-const box = document.getElementById("box"),
-  btns = document.getElementsByTagName("button"),
-  circles = document.getElementsByClassName("circle"),
-  wrapper = document.querySelector(".wrapper");
-  hearts = wrapper.querySelectorAll(".heart"), //здесь можно вместо document подставить wrapper, чтобы искало элементы уже внутри wrapper
-  oneHeart = wrapper.querySelector(".heart");
-
-  wrapper.append(div);
-wrapper.prepend(div);//помещает в начало родителя
-wrapper.appendChild(div); //То же самое
-
-wrapper.insertBefore(div, hearts[0]);// Это старое добавление
-
-// Помещаем div перед элементом
-hearts[0].before(div);
-// Помещаем div после элемента
-hearts[0].after(div);
-
-// Удаляем элемент
-circles[0].remove();
-wrapper.removeChild(hearts[1]);//Раньше удаляли через родителя
-
-
-// замена элемента
-hearts[0].replaceWith(circles[0]);
-wrapper.replaceChild(circles[0], hearts[0]);//Первый элемент меняется на второй. Устаревшее
-
-div.innerHTML = '<h1>hello world</h1>';// Тут добавится html структура - теги h1
-div.textContent = 'Hello'; // Тут просто текст добавится
-div.insertAdjacentHTML("beforebegin", '<h2>Hello</h2>')// beforebegin afterbegin beforeend
+// interactiveItems.forEach((item) => {
+//   item.innerHTML = `<li>ПРивет</li>  `;
+// });
+// interactiveItems.sort();
+ads2.forEach((item) => {
+  item.remove();
+});
+promoGenre.textContent = "Драма";
+promoBg.style.backgroundImage = 'url("../img/bg.jpg")';
