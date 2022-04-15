@@ -38,9 +38,9 @@ document.querySelector(".wrapper").append(div);
 const box = document.getElementById("box"),
   btns = document.getElementsByTagName("button"),
   circles = document.getElementsByClassName("circle"),
-  hearts = document.querySelectorAll(".heart"),
-  oneHeart = document.querySelector(".heart");
-  wrapper = querySelector(".wrapper");
+  wrapper = document.querySelector(".wrapper");
+  hearts = wrapper.querySelectorAll(".heart"), //здесь можно вместо document подставить wrapper, чтобы искало элементы уже внутри wrapper
+  oneHeart = wrapper.querySelector(".heart");
 
   wrapper.append(div);
 wrapper.prepend(div);//помещает в начало родителя
