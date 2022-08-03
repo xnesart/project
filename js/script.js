@@ -1,27 +1,39 @@
+/* Задания на урок:
+
+1) Удалить все рекламные блоки со страницы (правая часть сайта)
+
+2) Изменить жанр фильма, поменять "комедия" на "драма"
+
+3) Изменить задний фон постера с фильмом на изображение "bg.jpg". Оно лежит в папке img.
+Реализовать только при помощи JS
+
+4) Список фильмов на странице сформировать на основании данных из этого JS файла.
+Отсортировать их по алфавиту 
+
+5) Добавить нумерацию выведенных фильмов */
+
 "use strict";
 
-const box = document.getElementById("box");
-const btns = document.getElementsByTagName("button");
-const circles = document.getElementsByClassName("circle");
-const hearts = document.querySelectorAll(".heart");
-const oneHeart = document.querySelector(".heart");
-const wrapper = document.querySelector(".wrapper");
-const div = document.createElement("div");
+const movieDB = {
+    movies: ["Бомж", "Лига справедливости", "Ла-ла лэнд", "Одержимость", "Скотт Пилигрим против..."],
+};
 
-div.classList.add("black");
-wrapper.insertBefore(div, hearts[1]);
+let removeAd = document.querySelector(".promo__adv"),
+    genreOfFilm = document.querySelector(".promo__genre"),
+    backgroundImage = document.querySelector(".promo__bg"),
+    movieList = document.querySelector(".promo__interactive-list");
 
-// box.style.backgroundColor = 'blue';
-box.style.cssText = "background-color: brown; border-radius: 300px; height: 100px; display: none";
-box.style.width = "500px";
+removeAd.remove();
+genreOfFilm.innerHTML = "ДРАМА";
+backgroundImage.style.cssText = "background: url(../img/bg.jpg) center top";
 
-btns[1].style.borderRadius = "100%";
-// красим элементы с помощью цикла
-for (let i = 0; i < hearts.length; i++) {
-    hearts[i].style.backgroundColor = "pink";
-}
-
-hearts.forEach((item) => {
-    item.style.backgroundColor = "red";
+movieList.innerHTML = "";
+movieDB.movies.sort();
+movieDB.movies.forEach((film, i) => {
+    movieList.innerHTML += `
+  <li class="promo__interactive-item">${i+1}. ${film}
+          <div class="delete"></div>
+   </li>
+  `;
 });
-circles[0].remove();
+
