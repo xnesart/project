@@ -1,28 +1,22 @@
 "use strict";
-const overlay = document.querySelector(".overlay");
-const btn = document.querySelector("button");
-let i = 0;
-const deleteElement = (e) => {
-    // e.target.remove();
-    console.log(e.currentTarget);
-    console.log(e.type);
-    // i++;
-    // if ((i = 1)) {
-    //     btn.removeEventListener("click", deleteElement);
-    // }
-};
 
-// btn.addEventListener("click", deleteElement);
-// overlay.addEventListener("click", deleteElement);
+// console.log(document.head);
+// console.log(document.documentElement);
+// console.log(document.body.childNodes);
+// console.log(document.firstChild);
+// console.log(document.lastChild);
 
-// отменяем стандартные действия браузера
-const link = document.querySelector("a");
-link.addEventListener("click", function (event) {
-    event.preventDefault();
-    console.log(event.target);
-});
-// вешаем обработчик событий на несколько элементов
-const btns = document.querySelectorAll("button");
-btns.forEach((item) => {
-    item.addEventListener("click", deleteElement, {once: true}); // с помощью опции once указываем, что этот обработчик сработает только 1 раз
-});
+// console.log(document.querySelector("#current").parentNode); //получаем родительский узел у любого элемента
+// console.log(document.querySelector("#current").parentNode.parentNode); //получаем родительский узел у элемента родителя
+
+console.log(document.querySelector('[data-current = "3"]').nextSibling); //получение следующую ноду после дата атрибута
+
+console.log(document.querySelector('[data-current = "3"]').nextElementSibling); // получение следующего элемента после дата атрибута
+
+for(let node of document.body.childNodes) {
+//избавляемся от текстовых нод. этот код пропустит выбор текстовых нод
+if(node.nodeName == '#text') {
+    continue;
+}
+    console.log(node)
+}
