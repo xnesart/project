@@ -83,3 +83,18 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log("click");
     });
 });
+
+//Динамически загружаемый скрипт. Он загружается асинхронно, после того как выполнение дойдет сюда. Никого не ждет
+const script = document.createElement("script"); //создаем новый скрипт из нашего скрипта
+script.src = "js/test.js"; //прописываеам путь, по которому должен лежать скрипт. Он не создает сам файл скрипта
+script.async = false; // с помощью этой строчки мы отключаем ассинхронность. теперь скрипт будет ждать загрузки DOM
+document.body.append(script); // прикрепляем элемент к странице и помещаем в конец
+
+function loadScript(src) {
+    const script = document.createElement("script");
+    script.src = src;
+    script.async = false;
+    document.body.append(script);
+}
+loadScript("js/test.js");
+loadScript("js/some.js");
