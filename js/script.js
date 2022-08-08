@@ -32,7 +32,7 @@ window.addEventListener("DOMContentLoaded", (e) => {
         }
     });
 
-    // hideTabContent();
+    hideTabContent();
 
-    // showTabContent();
+    showTabContent();
 });
