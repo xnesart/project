@@ -1,42 +1,42 @@
-window.addEventListener("DOMContentLoaded", (e) => {
-    const tabsParent = document.querySelector(".tabheader__items"),
-        tabs = document.querySelectorAll(".tabheader__item"),
-        tabActive = document.querySelector(".tabheader__item_active"),
-        tabContent = document.querySelectorAll(".tabcontent");
+const btn = document.querySelector(".btn");
+let timerId, // Объявляем переменную таймера, чтобы её можно было использовать везде
+    i = 0; // объявляем переменную счетчика
+function myAnimation() {
+    const elem = document.querySelector('.box');
+    let pos = 0;
 
-    function hideTabs() {
-        tabs.forEach((tab) => {
-            tab.classList.remove("tabheader__item_active");
-        });
-        tabContent.forEach((item) => {
-            item.classList.add("hide");
-            item.classList.remove("show", "fade");
-        });
-        tabActive.classList.remove("tabheader__item_active");
-    }
-    function showTabs(i = 0) {
-        tabs[i].classList.add("tabheader__item_active");
-        tabContent[i].classList.add("show", "fade");
-        tabContent[i].classList.remove("hide");
-    }
+const id = setInterval(frame, 10);
 
-    tabsParent.addEventListener("click", (event) => {
-        const target = event.target;
-        if (target && target.classList.contains("tabheader__item")) {
-            tabs.forEach((item, i) => {
-                if (item == target) {
-                    hideTabs();
-                    showTabs(i);
-                    console.log('click')
-                }
-            });
+    function frame(){
+        if (pos === 300){
+            clearInterval(id)
+        } else{
+            pos++;
+            elem.style.top = pos + "px";
+            elem.style.left = pos + "px";
         }
-    });
-    hideTabs();
-    showTabs();
-});
+    }
+}
 
-//         tabsParent.addEventListener('click', (event) =>{
-//             const target = event.target;
+btn.addEventListener('click', myAnimation);
 
+
+// btn.addEventListener("click", () => {
+//     // const timerId = setTimeout(logger, 2000);  Устанавливает таймер, после которого запустится событие
+//     timerId = setInterval(logger, 2000); // Устанавливает интервал. Событие будет происходить постоянно каждые 2 сек
 // });
+
+// Еще один вариант таймера, внутрь передается функция
+
+// function logger() {
+//     if (i === 3) {
+//         clearInterval(timerId); // Останавливаем таймер
+//     }
+//     console.log("text");
+//     i++;
+// }
+
+// let id = setTimeout(function log() {
+//     console.log("hello");
+//     id = setTimeout(log, 500);// потом выполняет эту функцию
+// }, 500); // сначала ждет тут // потом опять ждет тут и заново выполняет верхнюю
