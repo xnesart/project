@@ -97,8 +97,19 @@ window.addEventListener("DOMContentLoaded", (e) => {
                 document.body.style.overflow = "hidden"; //запрещаем прокрутку страницы при вызове окна
             });
         });
+        // function showModalTimer() {
+        //     clearInterval(modalTimerId);
+        //     modal.classList.remove("hide");
+        //     modal.classList.add("show");
+        //     document.body.style.overflow = "hidden"; //запрещаем прокрутку страницы при вызове окна
+        // }
     }
-
+    function openModal() {
+        modal.classList.remove("hide");
+        modal.classList.add("show");
+        document.body.style.overflow = "hidden"; //запрещаем прокрутку страницы при вызове окна
+        clearInterval(modalTimerId);
+    }
     function closeModalWindow() {
         function hideModal() {
             modal.classList.add("hide");
@@ -120,4 +131,13 @@ window.addEventListener("DOMContentLoaded", (e) => {
 
     showModal();
     closeModalWindow();
+    const modalTimerId = setTimeout(openModal, 3000);
+
+    function showModalByScroll() { //объявляем функцию, она будет вызываться ниже.
+        if (window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
+            openModal();
+            window.removeEventListener("scroll", showModalByScroll);
+        }
+    }
+    window.addEventListener("scroll", showModalByScroll); 
 });
