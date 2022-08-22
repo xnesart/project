@@ -83,4 +83,61 @@ window.addEventListener("DOMContentLoaded", (e) => {
         }
     }
     setClock(".timer", deadline);
+
+    //modal
+    const modal = document.querySelector(".modal");
+    const callToMe = document.querySelectorAll("[data-modal]");
+    const closeModal = document.querySelector("[data-close]");
+
+    function showModal() {
+        callToMe.forEach((item) => {
+            item.addEventListener("click", (e) => {
+                modal.classList.remove("hide");
+                modal.classList.add("show");
+                document.body.style.overflow = "hidden"; //запрещаем прокрутку страницы при вызове окна
+            });
+        });
+        // function showModalTimer() {
+        //     clearInterval(modalTimerId);
+        //     modal.classList.remove("hide");
+        //     modal.classList.add("show");
+        //     document.body.style.overflow = "hidden"; //запрещаем прокрутку страницы при вызове окна
+        // }
+    }
+    function openModal() {
+        modal.classList.remove("hide");
+        modal.classList.add("show");
+        document.body.style.overflow = "hidden"; //запрещаем прокрутку страницы при вызове окна
+        clearInterval(modalTimerId);
+    }
+    function closeModalWindow() {
+        function hideModal() {
+            modal.classList.add("hide");
+            modal.classList.remove("show");
+            document.body.style.overflow = ""; //возвращаем прокрутку на место
+        }
+        modal.addEventListener("click", (e) => {
+            if (e.target == modal) {
+                hideModal();
+            }
+        });
+        document.addEventListener("keydown", (e) => {
+            if (e.code === "Escape" && modal.classList.contains("show")) {
+                hideModal();
+            }
+        });
+        closeModal.addEventListener("click", hideModal); // тут при клике вызывается функция hideModal
+    }
+
+    showModal();
+    closeModalWindow();
+    const modalTimerId = setTimeout(openModal, 3000);
+
+    function showModalByScroll() { //объявляем функцию, она будет вызываться ниже.
+        if (window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
+            openModal();
+            window.removeEventListener("scroll", showModalByScroll);
+        }
+    }
+    window.addEventListener("scroll", showModalByScroll); 
 });
