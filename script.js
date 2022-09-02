@@ -1,22 +1,25 @@
 "use strict";
 
-// console.log(document.head);
-// console.log(document.documentElement);
-// console.log(document.body.childNodes);
-// console.log(document.firstChild);
-// console.log(document.lastChild);
-
-// console.log(document.querySelector("#current").parentNode); //получаем родительский узел у любого элемента
-// console.log(document.querySelector("#current").parentNode.parentNode); //получаем родительский узел у элемента родителя
-
-console.log(document.querySelector('[data-current = "3"]').nextSibling); //получение следующую ноду после дата атрибута
-
-console.log(document.querySelector('[data-current = "3"]').nextElementSibling); // получение следующего элемента после дата атрибута
-
-for(let node of document.body.childNodes) {
-//избавляемся от текстовых нод. этот код пропустит выбор текстовых нод
-if(node.nodeName == '#text') {
-    continue;
+function User(name, id) {
+    this.name = name;
+    this.id = id;
+    this.human = true;
+    this.hello = function () { //создаем методы внутри функции
+        console.log(`Hello ${this.name}`);
+    };
 }
-    console.log(node)
+
+User.prototype.exit = function(name){  //добавляем методы функции конструктору без взаимодействия с ним
+ console.log(`Пользователь ${this.name} ушел`)
 }
+
+const ivan = new User("Ivan", 28);
+const alex = new User("Alex", 20);
+
+ivan.exit();
+
+ivan.hello() //вызываем метод
+alex.hello() //вызываем метод
+
+console.log(ivan);
+console.log(alex);
