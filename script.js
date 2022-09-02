@@ -1,82 +1,34 @@
 "use strict";
 
-// function showThis(a, b) {
-//     console.log(this);
-//     function sum() {
-//         console.log(this);
-//         // return this.a + this.b; //это будет undefined
-//         return a + b; //используем замыкание функции, оно в итоге подставит a и b
-//     }
-//     console.log(sum());
-// }
-// showThis(4, 5);
+class Rectangle {
+    constructor(height, width) {
+        //тут записываем приходящие аргументы
+        this.height = height;
+        this.width = width;
+    }
+    //создаем метод
+    calcArea() {
+        return this.height * this.width;
+    }
+}
 
-// const obj = {
-//     a: 20,
-//     b: 15,
-//     sum: function () {
-//         console.log(this); //этот this покажет объект, в котором вызывается метод
-//         function shout(){
-//             console.log(this); // а это простой вызов функции, будет undefined
-//         }
-//         shout();
-//     },
-// };
-// obj.sum();
-// function User(name, id) {
-//     this.name = name;
-//     this.id = id;
-//     this.human = true;
-//     this.hello = function () { //создаем методы внутри функции
-//         console.log(`Hello ${this.name}`);
-//     };
-// }
-// let ivan = new User('Ivan', 28);// Контекст вызова будет ссылаться на этот экземпляр, подставляя вместо this данный объект
+class ColoredRectangleWithText extends Rectangle {
+    //тут мы пишем через extends что наследуется Rectangle
+    constructor(height, width, text, bgColor) {
+        super(height, width); // Супер всегда должен идти первым. тут включаем наследование от Rectangle, сюда передаются this.height=height; this.width=width; Так же наследуются и методы.
+        this.text = text;
+        this.bgColor = bgColor;
+    }
+    showMyProps() {
+        console.log(`Текст: ${this.text},  цвет: ${this.bgColor}`);
+    }
+}
 
-// function sayName(surname) {
-//     console.log(this);
-//     console.log(this.name + surname);
-// }
-// const user = {
-//     name: "John",
-// };
-// sayName.call(user, "Smith");
-// sayName.apply(user, ["Smith"]);
+const div = new ColoredRectangleWithText(25, 10, "Hello World", "blue");
+div.showMyProps();
+console.log(div.calcArea()); // тут используем наследуемый метод от первого класса
 
-// function count(num) {
-//     return this * num;
-// }
-// const double = count.bind(2); //это передастся вместо this
-// console.log(double(3));
-// console.log(double(13));
-
-const btn = document.querySelector("button");
-btn.addEventListener("click", function () {
-    //когда обработчик события написан в классическом виде - function() то контекстом вызова будет сам элемент,  на котором произошло событие
-    console.log(this);
-    this.style.backgroundColor = "red";
-});
-const obj = {
-    num: 5,
-    sayNumber: function () {
-        const say = () => {
-            console.log(this); //изза стрелочной функции this покажет метод, а метод покажет объект. В итоге this покажет нам объект obj
-            console.log(this.num); //если бы функция была обычная, то была бы ошибка, тк num в ней нету, а стрелочная функция найдет num в объекте
-        };
-        say();
-    },
-};
-obj.sayNumber();
-
-// Примеры
-const double = (a) => { //аналогично
-    return a * 2;
-};
-const doublle = a => a * 2; // аналогично
-
-const btnn = document.querySelector("button");
-btn.addEventListener("click", (e) => {
-    //это то же самое что и с this
-    console.log(e.target);
-    e.target.style.backgroundColor = "red";
-});
+const square = new Rectangle(10, 10);
+const long = new Rectangle(20, 100);
+console.log(square.calcArea());
+console.log(long.calcArea());
